@@ -9,6 +9,7 @@ import com.example.blogshashi.service.UserService;
 import org.modelmapper.Converters;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,12 +21,16 @@ public class UserImplementation  implements UserService {
     private UserRepository userRepository;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDto createUser(UserDto userDto) {
         User  user = dtoToUser(userDto);
        try{
+           user.setPassword(passwordEncoder.encode(user.getPassword()));
            User save = this.userRepository.save(user);
+
            return userToDto(save);
        }catch (Exception e){
            throw new ApiException("error hai bhai error hai");
