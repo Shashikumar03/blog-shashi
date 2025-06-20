@@ -57,6 +57,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET).permitAll()
                 .requestMatchers(PUBLIC_URLS).permitAll()
                 .requestMatchers("/auth/login").permitAll()
+                .requestMatchers("api/v1/auth/login").permitAll()
                 .anyRequest()
 //                .authenticated()
                 .permitAll()
