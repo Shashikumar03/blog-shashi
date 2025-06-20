@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/auth/")
+@CrossOrigin("*")
 public class AuthController {
 
     @Autowired
@@ -76,11 +77,11 @@ public class AuthController {
 
     // register new user api
 
-//    @PostMapping("/register")
-//    public ResponseEntity<UserDto> registerUser(@Valid @RequestBody UserDto userDto) {
-//        UserDto registeredUser = this.userService.registerNewUser(userDto);
-//        return new ResponseEntity<UserDto>(registeredUser, HttpStatus.CREATED);
-//    }
+    @PostMapping("/register")
+    public ResponseEntity<UserDto> registerUser(@Valid @RequestBody UserDto userDto) {
+        UserDto registeredUser = this.userService.createUser(userDto);
+        return new ResponseEntity<UserDto>(registeredUser, HttpStatus.CREATED);
+    }
 
     // get loggedin user data
 //    @Autowired
